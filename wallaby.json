@@ -1,0 +1,5 @@
+{
+  "debug": true,
+  "files": ["lib/color.ts"],
+  "tests": ["test/*.js"]
+}
