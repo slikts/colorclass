@@ -67,8 +67,4 @@ namespace Color {
   export class ValueTypeError extends TypeError {
     message = 'Invalid color values';
   }
-
-  export class InvalidAlphaError extends TypeError {
-    message = 'Invalid alpha value';
-  }
 }

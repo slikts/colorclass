@@ -22,7 +22,4 @@ declare namespace Color {
     class ValueTypeError extends TypeError {
         message: string;
     }
-    class InvalidAlphaError extends TypeError {
-        message: string;
-    }
 }
