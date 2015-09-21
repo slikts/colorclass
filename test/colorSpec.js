@@ -1,3 +1,6 @@
+var Color = require('../lib/color').Color;
+var expect = require('expect');
+
 describe('instance methods', function() {
   it('should construct from rgb array', function() {
     new Color([255, 0, 5]);
@@ -8,10 +11,10 @@ describe('instance methods', function() {
   it('should not construct from more or less than 3 color values', function() {
     expect(function() {
       new Color([0, 1]);
-    }).toThrow(new Color.ValueNumberError);
+    }).toThrow(Color.ValueNumberError);
     expect(function() {
       new Color([0, 1, 2, 3]);
-    }).toThrow(new Color.ValueNumberError);
+    }).toThrow(Color.ValueNumberError);
   });
   it('should convert to string', function() {
     expect(''+Color.RED).toBe('rgb(255,0,0)');
@@ -23,7 +26,7 @@ describe('instance methods', function() {
   it('should not construct from invalid values', function() {
     expect(function() {
       new Color('rgb(255, 0, a)');
-    }).toThrow(new Color.ValueTypeError);
+    }).toThrow(Color.ValueTypeError);
   });
   it('should clamp values to 0-255', function() {
     expect(new Color([-10,500,128]).values()).toEqual([0, 255, 128]);
@@ -47,6 +50,6 @@ describe('class methods', function() {
     expect(Color.parse('rgb(0,0,0)')).toEqual([0, 0, 0]);
   });
   it('should parse invalid css rgb() colors to NaN', function() {
-    expect(Color.parse('rgb(a,b,c)')).toEqual([NaN, NaN, NaN]);
+    expect(Color.parse('rgb(a,b,c)').every(Number.isNaN)).toBe(true);
   });
 });

@@ -1,5 +1,13 @@
 {
   "debug": true,
-  "files": ["lib/color.ts"],
-  "tests": ["test/*.js"]
+  "files": [
+    "lib/color.js",
+    "lib/color.ts"
+  ],
+  "tests": [
+    "test/*Spec.js"
+  ],
+  "env": {
+    "type": "node"
+  }
 }

@@ -17,5 +17,8 @@
     "url": "https://github.com/slikts/colorclass/issues"
   },
   "homepage": "https://github.com/slikts/colorclass#readme",
-  "typings": "lib/color.d.ts"
+  "typings": "lib/color.d.ts",
+  "devDependencies": {
+    "expect": "1.x.x"
+  }
 }
