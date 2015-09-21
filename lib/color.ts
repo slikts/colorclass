@@ -1,6 +1,6 @@
 'use strict';
 
-class Color {
+export class Color {
   private rgb: [number, number, number]
 
   constructor(rgb: number[]);
@@ -53,7 +53,7 @@ class Color {
   }
 }
 
-namespace Color {
+export namespace Color {
   export const WHITE = new Color([255, 255, 255]);
   export const BLACK = new Color([0, 0, 0]);
   export const RED = new Color([255, 0, 0]);

@@ -1,6 +1,6 @@
 {
   "name": "colorclass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple class to parse CSS colors and mix/add/subtract them",
   "repository": {
     "type": "git",

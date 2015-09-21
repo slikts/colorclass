@@ -1,4 +1,4 @@
-declare class Color {
+export declare class Color {
     private rgb;
     constructor(rgb: number[]);
     constructor(rgb: string);
@@ -10,7 +10,7 @@ declare class Color {
     static clamp(value: number, max?: number, min?: number): number;
     static parse(color: string): number[];
 }
-declare namespace Color {
+export declare namespace Color {
     const WHITE: Color;
     const BLACK: Color;
     const RED: Color;
