@@ -3,7 +3,8 @@
     "target": "es6",
     "noImplicitAny": true,
     "sourceMap": true,
-    "removeComments": true
+    "removeComments": true,
+    "declaration": true
   },
   "files": [
     "lib/color.ts"

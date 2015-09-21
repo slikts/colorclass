@@ -2,12 +2,6 @@
   "name": "colorclass",
   "version": "1.0.0",
   "description": "A simple class to parse CSS colors and mix/add/subtract them",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slikts/colorclass.git"
@@ -22,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/slikts/colorclass/issues"
   },
-  "homepage": "https://github.com/slikts/colorclass#readme"
+  "homepage": "https://github.com/slikts/colorclass#readme",
+  "typings": "lib/color.d.ts"
 }
