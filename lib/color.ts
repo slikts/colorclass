@@ -1,7 +1,7 @@
 'use strict';
 
 class Color {
-  protected rgb: [number, number, number]
+  private rgb: [number, number, number]
 
   constructor(rgb: number[]);
   constructor(rgb: string);
