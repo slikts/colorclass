@@ -1,7 +1,8 @@
 {
   "name": "colorclass",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple class to parse CSS colors and mix/add/subtract them",
+  "main": "lib/color.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slikts/colorclass.git"
