@@ -4,7 +4,8 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "removeComments": true,
-    "declaration": true
+    "declaration": true,
+    "module": "commonjs"
   },
   "files": [
     "lib/color.ts"
