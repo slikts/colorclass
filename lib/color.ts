@@ -15,37 +15,47 @@ export class Color {
     if (rgb.some(isNaN)) {
       throw new Color.ValueTypeError;
     }
-    this.rgb = rgb;
+    this.rgb = rgb.map(Color.clamp).map(Math.round);
+  }
+
+  combine(target: Color, fn: (a: number, b: number) => number) {
+    return new Color(this.rgb.map((value, index) => {
+      return fn(value, target.rgb[index]);
+    }));
   }
 
   mix(target: Color) {
-    return new Color(this.rgb.map((value, index) => {
-      return Math.round((value + target.rgb[index]) / 2);
-    }));
+    return this.combine(target, (a, b) => {
+      return Math.round((a + b) / 2);
+    });
   }
 
   add(target: Color) {
-    return new Color(this.rgb.map((value, index) => {
-      return value + target.rgb[index];
-    }));
+    return this.combine(target, (a, b) => {
+      return a + b;
+    });
   }
 
   subtract(target: Color) {
-    return new Color(this.rgb.map((value, index) => {
-      return value - target.rgb[index];
-    }));
+    return this.combine(target, (a, b) => {
+      return a - b;
+    });
   }
 
-  toString() {
-    return `rgb(${ this.values().join(',') })`;
+  map(fn: (value: number, index?: number) => number) {
+    return new Color(this.rgb.map(fn));
   }
 
   values() {
-    return this.rgb.map((x) => { return Color.clamp(x); });
+    return this.rgb.slice();
   }
 
-  static clamp(value: number, max = 255, min = 0) {
-    return Math.min(max, Math.max(min, value));
+  toString() {
+    return `rgb(${ this.rgb.join(',') })`;
+  }
+
+  static clamp(value: number) {
+    return Math.min(255, Math.max(0, value));
   }
 
   static parse(color: string) {
@@ -56,6 +66,7 @@ export class Color {
 export namespace Color {
   export const WHITE = new Color([255, 255, 255]);
   export const BLACK = new Color([0, 0, 0]);
+  export const GRAY = new Color([127, 127, 127]);
   export const RED = new Color([255, 0, 0]);
   export const GREEN = new Color([0, 255, 0]);
   export const BLUE = new Color([0, 0, 255]);

@@ -1,7 +1,7 @@
 var Color = require('../lib/color').Color;
 var expect = require('expect');
 
-describe('instance methods', function() {
+describe('instance', function() {
   it('should construct from rgb array', function() {
     new Color([255, 0, 5]);
   });
@@ -33,14 +33,17 @@ describe('instance methods', function() {
   });
   it('should add different colors', function() {
     expect(Color.BLUE.add(Color.RED).values()).toEqual([255, 0, 255]);
-    expect(Color.RED.add(new Color([-128, 32, 0])).values()).toEqual([127, 32, 0]);
+    expect(Color.RED.add(new Color([0, 32, 0])).values()).toEqual([255, 32, 0]);
   });
   it('should subtract different colors', function() {
     expect(Color.RED.subtract(new Color([128, 0, 0])).values()).toEqual([127, 0, 0]);
   });
+  it('should map color values', function() {
+    expect(Color.RED.map(function(x) { return x * 0.5; }).values()).toEqual([128, 0, 0]);
+  });
 });
 
-describe('class methods', function() {
+describe('static', function() {
   it('should clamp values from 0 - 255', function() {
     expect(Color.clamp(256)).toBe(255);
     expect(Color.clamp(-1)).toBe(0);
