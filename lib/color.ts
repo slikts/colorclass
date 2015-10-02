@@ -16,26 +16,26 @@ export class Color {
     this.rgb = <Color.RGB>rgb.map(Color.clamp).map(Math.round);
   }
 
-  combine(target: Color, fn: (a: number, b: number) => number) {
+  apply(target: Color, fn: (a: number, b: number) => number) {
     return new Color(this.rgb.map((value, index) => {
       return fn(value, target.rgb[index]);
     }));
   }
 
   mix(target: Color) {
-    return this.combine(target, (a, b) => {
+    return this.apply(target, (a, b) => {
       return Math.round((a + b) / 2);
     });
   }
 
   add(target: Color) {
-    return this.combine(target, (a, b) => {
+    return this.apply(target, (a, b) => {
       return a + b;
     });
   }
 
   subtract(target: Color) {
-    return this.combine(target, (a, b) => {
+    return this.apply(target, (a, b) => {
       return a - b;
     });
   }
