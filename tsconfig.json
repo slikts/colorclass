@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "noImplicitAny": true,
     "sourceMap": true,
     "removeComments": true,
     "declaration": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "outDir": "build"
   },
   "files": [
-    "lib/color.ts"
+    "lib/color.ts",
+    "lib/globals.d.ts",
+    "test/colorSpec.ts",
+    "typings/tsd.d.ts"
   ],
   "formatCodeOptions": {
     "indentSize": 2,
