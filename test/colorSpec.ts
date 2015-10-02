@@ -2,8 +2,6 @@
 
 import { Color } from "../lib/color";
 
-console.log(123)
-
 describe("instance", function() {
   it("should construct from rgb array", function() {
     new Color([255, 0, 5]);
@@ -32,17 +30,17 @@ describe("instance", function() {
     }).toThrow(new Color.ValueTypeError);
   });
   it("should clamp values to 0-255", function() {
-    expect(new Color([-10,500,128]).values()).toEqual([0, 255, 128]);
+    expect(new Color([-10,500,128]).slice()).toEqual([0, 255, 128]);
   });
   it("should add different colors", function() {
-    expect(Color.BLUE.add(Color.RED).values()).toEqual([255, 0, 255]);
-    expect(Color.RED.add(new Color([0, 32, 0])).values()).toEqual([255, 32, 0]);
+    expect(Color.BLUE.add(Color.RED).slice()).toEqual([255, 0, 255]);
+    expect(Color.RED.add(new Color([0, 32, 0])).slice()).toEqual([255, 32, 0]);
   });
   it("should subtract different colors", function() {
-    expect(Color.RED.subtract(new Color([128, 0, 0])).values()).toEqual([127, 0, 0]);
+    expect(Color.RED.subtract(new Color([128, 0, 0])).slice()).toEqual([127, 0, 0]);
   });
   it("should map color values", function() {
-    expect(Color.RED.map(function(x) { return x * 0.5; }).values()).toEqual([128, 0, 0]);
+    expect(Color.RED.map(function(x) { return x * 0.5; }).slice()).toEqual([128, 0, 0]);
   });
 });
 
