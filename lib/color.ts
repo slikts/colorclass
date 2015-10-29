@@ -1,25 +1,43 @@
 export class Color {
-  private rgb: Color.RGB;
+  private _rgb: Color.RGB;
+  private _alpha = 1;
 
-  constructor(rgb: number[]);
-  constructor(rgb: string);
-  constructor(rgb: any) {
-    if (typeof rgb === "string") {
-      rgb = Color.parse(rgb);
+  constructor(rgba: [number, number, number, number]);
+  constructor(rgba: Color.RGB);
+  constructor(rgba: string);
+  constructor(rgba: any) {
+    if (typeof rgba === "string") {
+      rgba = Color.parse(rgba);
     }
-    if (rgb.length !== 3) {
+    if (rgba.length < 3 || rgba.length > 4) {
       throw new Color.ValueNumberError;
     }
-    if (rgb.some(isNaN)) {
+    if (rgba.length === 4) {
+      this.alpha = rgba[3];
+    }
+    this.rgb = rgba.slice(0, 3);
+  }
+
+  private get alpha() { return this._alpha; }
+  private set alpha(value: number) {
+    if (isNaN(value) || value < 0 || value > 1) {
+      throw new Color.InvalidAlphaValue;
+    }
+    this._alpha = value;
+  }
+
+  private get rgb() { return this._rgb; }
+  private set rgb(values: Color.RGB) {
+    if (values.some(isNaN)) {
       throw new Color.ValueTypeError;
     }
-    this.rgb = <Color.RGB>rgb.map(Color.clamp).map(Math.round);
+    this._rgb = <Color.RGB>values.map(Color.clamp).map(Math.round);
   }
 
   apply(target: Color, fn: (a: number, b: number) => number) {
-    return new Color(this.rgb.map((value, index) => {
-      return fn(value, target.rgb[index]);
-    }));
+    return this.map((value, index) => {
+      return fn(value, target._rgb[index]);
+    });
   }
 
   mix(target: Color) {
@@ -41,15 +59,16 @@ export class Color {
   }
 
   map(fn: (value: number, index?: number) => number) {
-    return new Color(this.rgb.map(fn));
+    return new Color(<Color.RGB>this._rgb.map(fn));
   }
 
   slice() {
-    return this.rgb.slice();
+    return this._rgb.slice();
   }
 
   toString() {
-    return `rgb(${ this.rgb.join(",") })`;
+    let values = this._rgb.join(", ");
+    return this._alpha === 1 ? `rgb(${ values })` : `rgba(${ values }, ${ this._alpha })`;
   }
 
   static clamp(value: number) {
@@ -57,7 +76,7 @@ export class Color {
   }
 
   static parse(color: string) {
-    return color.match(/\((.*)\)/)[1].split(",").map((x) => { return +x; });
+    return color.match(/rgba?\((.*?)\)/)[1].split(",").map(x => +x);
   }
 }
 
@@ -76,5 +95,9 @@ export namespace Color {
 
   export class ValueTypeError extends TypeError {
     message = "Invalid color values";
+  }
+
+  export class InvalidAlphaValue extends TypeError {
+    message = "Invalid alpha value";
   }
 }
