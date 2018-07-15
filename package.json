@@ -20,7 +20,7 @@
   "homepage": "https://github.com/slikts/colorclass#readme",
   "typings": "lib/color.d.ts",
   "devDependencies": {
-    "wallaby-webpack": "0.0.8",
-    "webpack": "^1.12.2"
+    "wallaby-webpack": "3.9.10",
+    "webpack": "^4.16.0"
   }
 }
